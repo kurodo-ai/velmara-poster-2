@@ -143,6 +143,13 @@ def main():
         d.line([(bx + 16 * s, by), (bx + 16 * s, by - 40 * s)], fill=INK, width=3)
         d.polygon([(bx + 16 * s, by - 40 * s), (bx + 16 * s, by - 4 * s), (bx + 33 * s, by - 4 * s)], fill=CREAM)
         d.polygon([(bx + 14 * s, by - 34 * s), (bx + 14 * s, by - 4 * s), (bx + 2 * s, by - 4 * s)], fill=PALE)
+        # a short broken reflection under each hull (fixed offsets, no
+        # randomness, so the seeded draws that follow stay untouched)
+        for k in range(3):
+            ry = by + (14 + 9 * k) * s
+            rw = (30 - 7 * k) * s
+            d.line([(bx + 17 * s - rw / 2, ry), (bx + 17 * s + rw / 2, ry)],
+                   fill=(39, 120, 130, 170), width=2)
     # birds
     for bx, by, s in [(180, 300, 1.0), (250, 262, 0.75), (540, 226, 0.85), (610, 286, 0.6)]:
         d.arc([bx - 14 * s, by - 6 * s, bx, by + 6 * s], 300, 30, fill=INK, width=3)
