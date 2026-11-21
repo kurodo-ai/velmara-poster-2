@@ -16,9 +16,14 @@ def main() -> int:
     out_dir = os.environ.get("MAKEFUN_OUTPUT_DIR") or "/output"
     os.makedirs(out_dir, exist_ok=True)
     src = os.path.join(HERE, "entry.png")
-    if os.path.getsize(src) == 0:
+    if not os.path.isfile(src):
+        raise SystemExit("entry.png is missing; run src/make_image.py first")
+    size = os.path.getsize(src)
+    if size == 0:
         raise SystemExit("entry.png is empty")
-    shutil.copyfile(src, os.path.join(out_dir, "entry.png"))
+    dest = os.path.join(out_dir, "entry.png")
+    shutil.copyfile(src, dest)
+    print(f"handed in entry.png ({size} bytes) -> {dest}")
     return 0
 
 
